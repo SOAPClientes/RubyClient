@@ -1,22 +1,24 @@
 require 'bundler/setup'
 require 'sinatra'
 require 'savon'
+require 'httparty'
+require 'nokogiri'
 
 client = Savon.client(wsdl: 'https://soapserviceserver.azurewebsites.net/WebServices/WebServer.asmx?WSDL')
 
-#Principal
+# Principal
 get '/' do
   erb :index
 end
 
-#Mensaje
+# Mensaje
 get '/mensaje' do
   response = client.call(:mensaje)
   @mensaje_ws = response.body[:mensaje_response][:mensaje_result]
   erb :mensaje
 end
 
-#Informacion
+# Información
 get '/informacion' do
   response = client.call(:informacion)
   @informacion_ws = response.body[:informacion_response][:informacion_result]
@@ -24,7 +26,7 @@ get '/informacion' do
   erb :informacion
 end
 
-#Operaciones
+# Operaciones
 get '/operaciones' do
   erb :operaciones
 end
@@ -41,7 +43,7 @@ post '/operaciones' do
   erb :operaciones
 end
 
-#Tabla
+# Tabla
 get '/tabla' do
   erb :tabla
 end
@@ -51,4 +53,20 @@ post '/tabla' do
   @resultado = response.body[:tabla_response][:tabla_result][:string]
   @numero = params[:n1]
   erb :tabla
+end
+
+# Estudiantes
+get '/estudiantes' do
+  response = client.call(:estudiantes)
+  estudiantes_result = response.body[:estudiantes_response][:estudiantes_result][:string]
+  @students = estudiantes_result.map { |student| student.split(',') }
+  erb :estudiantes
+end
+
+# Estudiantes2
+get '/estudiantes2' do
+  response = client.call(:estudiantes2)
+  estudiantes_result = response.body[:estudiantes2_response][:estudiantes2_result][:string]
+  @students = estudiantes_result.map { |student| student.split(',') }
+  erb :estudiantes2
 end

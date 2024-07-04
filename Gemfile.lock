@@ -10,6 +10,7 @@ GEM
     base64 (0.2.0)
     bigdecimal (3.1.8)
     builder (3.3.0)
+    csv (3.3.0)
     date (3.3.4)
     faraday (2.9.2)
       faraday-net_http (>= 2.0, < 3.2)
@@ -18,6 +19,10 @@ GEM
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
+    httparty (0.22.0)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     httpi (4.0.2)
       base64
       mutex_m
@@ -29,6 +34,8 @@ GEM
       net-pop
       net-smtp
     mini_mime (1.1.5)
+    multi_xml (0.7.1)
+      bigdecimal (~> 3.1)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mutex_m (0.2.0)
@@ -49,6 +56,8 @@ GEM
     nokogiri (1.16.6-arm-linux)
       racc (~> 1.4)
     nokogiri (1.16.6-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.6-x64-mingw-ucrt)
       racc (~> 1.4)
     nokogiri (1.16.6-x86-linux)
       racc (~> 1.4)
@@ -101,11 +110,14 @@ PLATFORMS
   aarch64-linux
   arm-linux
   arm64-darwin
+  x64-mingw-ucrt
   x86-linux
   x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
+  httparty
+  nokogiri
   rackup (~> 2.1)
   savon (~> 2.11)
   sinatra
