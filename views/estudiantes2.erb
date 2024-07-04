@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Estudiantes</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
     body {
       background-color: #f8f9fa;
@@ -17,15 +18,20 @@
     .container {
       margin-top: 50px;
     }
-    .table thead th {
-      background-color: #007bff;
-      color: white;
+    .student-card {
+      display: inline-block;
+      text-align: center;
+      width: 150px;
+      margin: 10px;
     }
-    .table-success {
-      background-color: #d4edda !important;
+    .student-icon {
+      font-size: 3rem;
     }
-    .table-danger {
-      background-color: #f8d7da !important;
+    .approved {
+      color: green;
+    }
+    .disapproved {
+      color: red;
     }
     .btn-custom {
       background-color: #007bff;
@@ -39,27 +45,15 @@
       <h1>Lista de Estudiantes</h1>
     </div>
     <% if @students.any? %>
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Nota</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @students.each do |student| %>
-              <tr class="<%= student[2].to_f >= 11 ? 'table-success' : 'table-danger' %>">
-                <td><%= student[0] %></td>
-                <td><%= student[1] %></td>
-                <td><%= student[2] %></td>
-                <td><%= student[2].to_f >= 11 ? 'Aprobado' : 'Desaprobado' %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <div class="d-flex flex-wrap justify-content-center">
+        <% @students.each do |student| %>
+          <div class="student-card">
+            <i class="fas fa-user student-icon <%= student[2].to_f >= 11 ? 'approved' : 'disapproved' %>"></i>
+            <div><strong><%= student[0] %> <%= student[1] %></strong></div>
+            <div>Nota: <%= student[2] %></div>
+            <div>Estado: <%= student[2].to_f >= 11 ? 'Aprobado' : 'Desaprobado' %></div>
+          </div>
+        <% end %>
       </div>
     <% else %>
       <div class="alert alert-warning text-center" role="alert">
@@ -74,5 +68,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>

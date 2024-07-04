@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WS Service Cliente Ruby</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
     body {
       background-color: #f8f9fa;
@@ -22,21 +23,92 @@
       color: white;
       margin: 10px 0;
     }
+    .card {
+      border: none;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    .card-title {
+      font-size: 1.25rem;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
   <div class="container text-center">
     <h1>Servicios SOAP</h1>
-    <a href="/mensaje" class="btn btn-custom">Mensaje de Bienvenida</a><br>
-    <a href="/informacion" class="btn btn-custom">Información</a><br>
-    <a href="/operaciones" class="btn btn-custom">Operaciones Aritméticas</a><br>
-    <a href="/tabla" class="btn btn-custom">Tabla</a><br>
-    <a href="/estudiantes" class="btn btn-custom">Lista de Estudiantes Array</a><br>
-    <a href="/estudiantes2" class="btn btn-custom">Lista Estudiantes</a><br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <i class="fas fa-envelope-open-text"></i>
+            <h5 class="card-title">Mensaje de Bienvenida</h5>
+            <a href="/mensaje" class="btn btn-custom">Ir</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <i class="fas fa-info-circle"></i>
+            <h5 class="card-title">Información</h5>
+            <a href="/informacion" class="btn btn-custom">Ir</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <i class="fas fa-calculator"></i>
+            <h5 class="card-title">Operaciones Aritméticas</h5>
+            <a href="/operaciones" class="btn btn-custom">Ir</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <i class="fas fa-table"></i>
+            <h5 class="card-title">Tabla</h5>
+            <a href="/tabla" class="btn btn-custom">Ir</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <i class="fas fa-list"></i>
+            <h5 class="card-title">Lista de Estudiantes Array</h5>
+            <a href="/estudiantes" class="btn btn-custom">Ir</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <i class="fas fa-users"></i>
+            <h5 class="card-title">Lista Estudiantes</h5>
+            <a href="/estudiantes2" class="btn btn-custom">Ir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="http://161.132.37.250/" class="btn btn-custom mt-3">Volver</a>
   </div>
   
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>
