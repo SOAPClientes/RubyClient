@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WS Service Cliente Ruby - Tabla</title>
+</head>
+<body>
+    <center>
+        <h1>Tabla</h1>
+        <br><br>
+        <form action="/tabla" method="POST">
+            <table>
+                <tr>
+                    <td>Número: </td>
+                    <td><input type="number" name="n1"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Calcular" name="Calcular">
+                        <input type="reset" value="Limpiar">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <% if @resultado %>
+            <br><br>
+            <%= "N1: #{@numero}<br>" %>
+            <% @resultado.each do |row| %>
+                <%= row %><br>
+            <% end %>
+        <% end %>
+        <br><br>
+        <a href="/">Volver</a>
+    </center>
+</body>
+</html>

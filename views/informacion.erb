@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WS Service Cliente Ruby - Información</title>
+</head>
+<body>
+    <center>
+        <h1>Información</h1>
+        <br><br>
+        <% @datos.each do |item| %>
+          <%= item %><br>
+        <% end %>
+        <br><br>
+        Curso: <%= @datos[0] %><br>
+        Ciclo: <%= @datos[1] %><br>
+        Cantidad: <%= @datos[2] %><br>
+        Aprobados: <%= @datos[3] %><br>
+        Desaprobados: <%= @datos[4] %><br>
+        <br><br>
+        <a href="/">Volver</a>
+    </center>
+</body>
+</html>

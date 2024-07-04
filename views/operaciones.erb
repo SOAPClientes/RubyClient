@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WS Service Cliente Ruby - Operaciones</title>
+</head>
+<body>
+    <center>
+        <h1>Operaciones Aritméticas</h1>
+        <br><br>
+        <form action="/operaciones" method="post">
+            <table>
+                <tr>
+                    <td>Número 1: </td>
+                    <td><input type="text" name="n1"></td>
+                </tr>
+                <tr>
+                    <td>Número 2:</td>
+                    <td><input type="text" name="n2"></td>
+                </tr>
+                <tr>
+                    <td>Operación: </td>
+                    <td>
+                        <select name="operacion">
+                            <option value="S">Suma</option>
+                            <option value="R">Resta</option>
+                            <option value="M">Multiplicación</option>
+                            <option value="D">División</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Calcular" name="Calcular">
+                        <input type="reset" value="Limpiar">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <% if @resultado %>
+            <br><br>
+            <%= "N1: #{@valor1}<br>" %>
+            <%= "N2: #{@valor2}<br>" %>
+            <%= "Resultado: #{@resultado}<br>" %>
+        <% end %>
+        <br><br>
+        <a href="/">Volver</a>
+    </center>
+</body>
+</html>
