@@ -1,50 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>WS Service Cliente Ruby - Operaciones</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WS Service Cliente Ruby - Operaciones</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+    h1 {
+      margin: 20px 0;
+      color: #343a40;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+    }
+    .calc-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: white;
+    }
+    .calc-display {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .calc-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .calc-button {
+      font-size: 1.2rem;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .result-container {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
-    <center>
-        <h1>Operaciones Aritméticas</h1>
-        <br><br>
-        <form action="/operaciones" method="post">
-            <table>
-                <tr>
-                    <td>Número 1: </td>
-                    <td><input type="text" name="n1"></td>
-                </tr>
-                <tr>
-                    <td>Número 2:</td>
-                    <td><input type="text" name="n2"></td>
-                </tr>
-                <tr>
-                    <td>Operación: </td>
-                    <td>
-                        <select name="operacion">
-                            <option value="S">Suma</option>
-                            <option value="R">Resta</option>
-                            <option value="M">Multiplicación</option>
-                            <option value="D">División</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" value="Calcular" name="Calcular">
-                        <input type="reset" value="Limpiar">
-                    </td>
-                </tr>
-            </table>
-        </form>
-        <% if @resultado %>
-            <br><br>
-            <%= "N1: #{@valor1}<br>" %>
-            <%= "N2: #{@valor2}<br>" %>
-            <%= "Resultado: #{@resultado}<br>" %>
-        <% end %>
-        <br><br>
-        <a href="/">Volver</a>
-    </center>
+  <div class="container text-center">
+    <h1>Operaciones Aritméticas</h1>
+    <div class="calc-container">
+      <div class="calc-display">
+        <input type="text" id="input1" class="form-control" placeholder="Número 1" oninput="handleInput(event, 'input2', 'operator')">
+        <input type="text" id="operator" class="form-control mt-2" readonly>
+        <input type="text" id="input2" class="form-control mt-2" placeholder="Número 2" oninput="handleInput(event)">
+      </div>
+      <div class="calc-buttons">
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('1')">1</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('2')">2</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('3')">3</button>
+        <button class="btn btn-warning calc-button" onclick="setOperator('+')">+</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('4')">4</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('5')">5</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('6')">6</button>
+        <button class="btn btn-warning calc-button" onclick="setOperator('-')">-</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('7')">7</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('8')">8</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('9')">9</button>
+        <button class="btn btn-warning calc-button" onclick="setOperator('*')">*</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('0')">0</button>
+        <button class="btn btn-light calc-button" onclick="appendToDisplay('.')">.</button>
+        <button class="btn btn-danger calc-button" onclick="clearDisplay()">C</button>
+        <button class="btn btn-warning calc-button" onclick="setOperator('/')">/</button>
+        <button class="btn btn-success calc-button" style="grid-column: span 4;" onclick="calculateResult()">=</button>
+      </div>
+      <form id="calcForm" action="/operaciones" method="post">
+        <input type="hidden" id="calcInput1" name="n1">
+        <input type="hidden" id="calcOperator" name="operacion">
+        <input type="hidden" id="calcInput2" name="n2">
+      </form>
+      <% if @resultado %>
+        <div class="result-container">
+          <p>Resultado: <%= @resultado %></p>
+        </div>
+      <% end %>
+    </div>
+    <a href="/" class="btn btn-custom mt-3">Volver</a>
+  </div>
+
+  <script>
+    function appendToDisplay(value) {
+      const input1 = document.getElementById('input1');
+      const input2 = document.getElementById('input2');
+      const operator = document.getElementById('operator');
+
+      if (operator.value) {
+        input2.value += value;
+      } else {
+        input1.value += value;
+      }
+    }
+
+    function setOperator(op) {
+      const operator = document.getElementById('operator');
+      operator.value = op;
+      document.getElementById('input2').focus();
+    }
+
+    function clearDisplay() {
+      document.getElementById('input1').value = '';
+      document.getElementById('operator').value = '';
+      document.getElementById('input2').value = '';
+      document.getElementById('input1').focus();
+    }
+
+    function handleInput(event, nextInputId = null, operatorId = null) {
+      if (nextInputId && operatorId && ['+', '-', '*', '/'].includes(event.data)) {
+        document.getElementById(operatorId).value = event.data;
+        document.getElementById(nextInputId).focus();
+      }
+    }
+
+    function calculateResult() {
+      const operator = document.getElementById('operator').value;
+      let calcOperator = '';
+      
+      switch (operator) {
+        case '+':
+          calcOperator = 'S';
+          break;
+        case '-':
+          calcOperator = 'R';
+          break;
+        case '*':
+          calcOperator = 'M';
+          break;
+        case '/':
+          calcOperator = 'D';
+          break;
+      }
+
+      document.getElementById('calcInput1').value = document.getElementById('input1').value;
+      document.getElementById('calcOperator').value = calcOperator;
+      document.getElementById('calcInput2').value = document.getElementById('input2').value;
+      document.getElementById('calcForm').submit();
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

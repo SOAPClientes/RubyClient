@@ -1,23 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WS Service Cliente Ruby</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+    h1 {
+      margin: 20px 0;
+      color: #343a40;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
-  <center>
+  <div class="container text-center">
     <h1>Servicios SOAP</h1>
-    <br><br>
-    <a href="/mensaje">Mensaje de Bienvenida</a>
-    <br><br>
-    <a href="/informacion">Información</a>
-    <br><br>
-    <a href="/operaciones">Operaciones Aritméticas</a>
-    <br><br>
-    <a href="/tabla">Tabla</a>
-    <br><br>
-    <a href="/estudiantes">Lista de Estudiantes Array</a>
-    <br><br>
-    <a href="/estudiantes2">Lista Estudiantes</a>
-  </center>
+    <a href="/mensaje" class="btn btn-custom">Mensaje de Bienvenida</a><br>
+    <a href="/informacion" class="btn btn-custom">Información</a><br>
+    <a href="/operaciones" class="btn btn-custom">Operaciones Aritméticas</a><br>
+    <a href="/tabla" class="btn btn-custom">Tabla</a><br>
+    <a href="/estudiantes" class="btn btn-custom">Lista de Estudiantes Array</a><br>
+    <a href="/estudiantes2" class="btn btn-custom">Lista Estudiantes</a><br>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
